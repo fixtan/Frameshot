@@ -1,0 +1,43 @@
+name: Build (macOS / Linux)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "アップ先のリリースタグ（例: v1.0.0。空なら成果物だけ作る）"
+        required: false
+        default: ""
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: macos-13,     args: "--mac dmg zip --x64",   name: mac-intel }
+          - { os: macos-latest, args: "--mac dmg zip --arm64", name: mac-arm64 }
+          - { os: ubuntu-latest, args: "--linux AppImage deb", name: linux }
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run check
+      - run: npx electron-builder ${{ matrix.args }} --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frameshot-${{ matrix.name }}
+          path: |
+            dist/*.dmg
+            dist/*.zip
+            dist/*.AppImage
+            dist/*.deb
+      - if: ${{ inputs.tag != '' }}
+        shell: bash
+        run: gh release upload "${{ inputs.tag }}" dist/*.dmg dist/*.zip dist/*.AppImage dist/*.deb --clobber 2>/dev/null || gh release upload "${{ inputs.tag }}" $(ls dist/*.dmg dist/*.zip dist/*.AppImage dist/*.deb 2>/dev/null) --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
