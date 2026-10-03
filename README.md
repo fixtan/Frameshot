@@ -3,7 +3,7 @@
 固定サイズの枠の中に Web ページを表示して、静止画（PNG / JPG / WebP）と動画（MP4）をボタン一つで撮るデスクトップツール。
 
 <p align="center">
-  <img src="docs/images/main.webp" alt="Frameshot のメイン画面" width="720">
+  <img src="docs/images/main.png" alt="Frameshot のメイン画面" width="720">
 </p>
 
 - 外部サイトをそのまま枠に入れられる（iframe の埋め込み拒否に引っかからない）
@@ -26,7 +26,8 @@
 | OS | 状況 |
 |---|---|
 | Windows | 動作確認済み（配布物あり） |
-| macOS / Linux | 配布物なし。ソースからは動く見込みだが、未確認 |
+| macOS | Intel Mac で静止画・動画を確認（Apple Silicon 版は未確認）。署名なし。配布物は順次追加 |
+| Linux | 仮想環境（Xvfb）でのみ確認。実機は未確認。配布物（AppImage / deb）は順次追加 |
 
 **Windows の警告について:** コード署名をしていないので、初めて起動すると SmartScreen が「発行元不明」と出す。「詳細情報」→「実行」で起動できる。
 
@@ -38,7 +39,7 @@
 4. 動画のフレームレート・画質・最大録画時間・音声の ON/OFF は、⏺ の隣の ▾ から
 
 <p align="center">
-  <img src="docs/images/video-menu.webp" alt="動画の設定メニュー" width="560">
+  <img src="docs/images/video-menu.png" alt="動画の設定メニュー" width="560">
 </p>
 
 ### 録画中の表示
@@ -46,7 +47,7 @@
 録画中は、枠の見える範囲だけが画面に出る（表示は左上の切り抜き。**録画は枠の全体**）。録画中は、サイズ・倍率の変更と静止画の撮影はできない。
 
 <p align="center">
-  <img src="docs/images/recording.webp" alt="録画中の画面" width="720">
+  <img src="docs/images/recording.png" alt="録画中の画面" width="720">
 </p>
 
 ### 撮れるもの
@@ -76,6 +77,8 @@
 - **DRM で保護された映像**（配信サービスなど）は、再生も撮影もできない。
 - **2x / 3x の動画**は撮れない（動画は等倍のみ。静止画は 1x / 2x / 3x）。
 - **システム全体の音**は録れない。録れるのは、枠のページの音だけ。
+- **重いページの動画**（Three.js など描画が重いページ）は、PC の性能によってはカクつく。ページの描画と録画のエンコードを同じ PC で行うため。fps や枠のサイズを下げると軽くなる。
+- **macOS では、枠がウィンドウに収まらない大きさだと録画を始められない**ことがある（静止画は問題ない）。ウィンドウを大きくするか、枠を小さくする。
 
 ## ソースから動かす
 

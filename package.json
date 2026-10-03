@@ -1,6 +1,6 @@
 {
   "name": "frameshot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "固定サイズの枠の中に Web ページを表示して、静止画・動画をボタン一つで撮る撮影ツール",
   "main": "src/main/main.js",
   "productName": "Frameshot",
