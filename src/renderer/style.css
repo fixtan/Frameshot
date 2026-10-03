@@ -1,0 +1,103 @@
+/* --top / --bottom は src/main/main.js の CHROME と揃える */
+:root {
+  --top: 96px;
+  --bottom: 30px;
+  --bg: #0b0710;
+  --panel: #17101f;
+  --line: #2a2234;
+  --text: #e8e0f0;
+  --muted: #8a7f99;
+  --accent: #ff5fa2;
+  --ok: #6fdc8c;
+  --err: #ff6a6a;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.4 ui-monospace, Menlo, Consolas, "Noto Sans Mono CJK JP", monospace;
+  overflow: hidden;
+  user-select: none;
+}
+
+#toolbar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--top);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.row { display: flex; align-items: center; gap: 6px; height: 36px; min-width: 0; }
+.row > :not(#url) { flex-shrink: 0; }
+.group { display: flex; align-items: center; gap: 4px; }
+.spacer { flex: 1; }
+[hidden] { display: none !important; }
+
+label { display: flex; align-items: center; gap: 4px; color: var(--muted); white-space: nowrap; }
+label:has(input[type="checkbox"]) { cursor: pointer; }
+
+button, select, input[type="text"], input[type="number"] {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  height: 30px;
+  padding: 0 8px;
+}
+button { cursor: pointer; white-space: nowrap; }
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: 0.4; cursor: default; }
+button.primary { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+select { cursor: pointer; }
+input:focus, select:focus, button:focus-visible { outline: 1px solid var(--accent); outline-offset: 0; }
+input[type="text"], input[type="number"] { user-select: text; }
+
+#url { flex: 1; min-width: 0; }
+#w, #h { width: 76px; }
+#quality { width: 56px; }
+#preset { width: 214px; }
+#presetName { width: 220px; }
+input[type="checkbox"] { accent-color: var(--accent); width: 15px; height: 15px; margin: 0; }
+#star.on { color: #ffd34d; border-color: #ffd34d; }
+
+#rec.recording { color: #fff; background: var(--err); border-color: var(--err); animation: pulse 1.2s ease-in-out infinite; }
+#recOpt { padding: 0 6px; }
+@keyframes pulse { 50% { opacity: 0.6; } }
+
+#outline.recording { border-color: var(--err); box-shadow: 0 0 0 1px rgba(255, 106, 106, 0.3); }
+#outline {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 1px rgba(255, 95, 162, 0.18);
+}
+
+#statusbar {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--bottom);
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+#status { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#status.ok { color: var(--ok); }
+#status.error { color: var(--err); }
+#status.rec { color: var(--err); font-weight: 600; }
+#info { white-space: nowrap; }
+#dirBox { display: flex; align-items: center; gap: 6px; min-width: 0; max-width: 38%; }
+#dir { overflow: hidden; white-space: nowrap; }
+#dirBox button { height: 22px; padding: 0 8px; font-size: 12px; }

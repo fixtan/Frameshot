@@ -1,0 +1,17 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>tone</title>
+<body style="margin:0;background:#fff">
+<script>
+  // ユーザー操作つきで呼ぶと鳴る（自動再生の制限のため）
+  window.startTone = () => {
+    const ctx = new AudioContext();
+    // 左だけ 440Hz（右は無音）。ステレオのまま録れているかを調べる用
+    const merger = ctx.createChannelMerger(2);
+    const o = ctx.createOscillator();
+    o.frequency.value = 440;
+    o.connect(merger, 0, 0);
+    merger.connect(ctx.destination);
+    o.start();
+  };
+</script>
