@@ -49,7 +49,7 @@ function buildFfmpegArgs(o) {
     '-an',
     '-c:v', 'libx264',
     '-crf', String(q.crf),
-    '-preset', 'medium',
+    '-preset', 'veryfast',
     '-pix_fmt', 'yuv420p',
     '-movflags', '+faststart',
     // 出力名の拡張子（.part）から形式を推測できないので明示する
