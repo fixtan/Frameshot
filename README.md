@@ -3,7 +3,7 @@
 固定サイズの枠の中に Web ページを表示して、静止画（PNG / JPG / WebP）と動画（MP4）をボタン一つで撮るデスクトップツール。
 
 <p align="center">
-  <img src="docs/images/main.png" alt="Frameshot のメイン画面" width="720">
+  <img src="docs/images/main.webp" alt="Frameshot のメイン画面" width="720">
 </p>
 
 - 外部サイトをそのまま枠に入れられる（iframe の埋め込み拒否に引っかからない）
@@ -39,7 +39,7 @@
 4. 動画のフレームレート・画質・最大録画時間・音声の ON/OFF は、⏺ の隣の ▾ から
 
 <p align="center">
-  <img src="docs/images/video-menu.png" alt="動画の設定メニュー" width="560">
+  <img src="docs/images/video-menu.webp" alt="動画の設定メニュー" width="560">
 </p>
 
 ### 録画中の表示
@@ -47,7 +47,7 @@
 録画中は、枠の見える範囲だけが画面に出る（表示は左上の切り抜き。**録画は枠の全体**）。録画中は、サイズ・倍率の変更と静止画の撮影はできない。
 
 <p align="center">
-  <img src="docs/images/recording.png" alt="録画中の画面" width="720">
+  <img src="docs/images/recording.webp" alt="録画中の画面" width="720">
 </p>
 
 ### 撮れるもの
